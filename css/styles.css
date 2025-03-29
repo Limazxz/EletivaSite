@@ -7,15 +7,8 @@ body {
   line-height: 1.6;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 600px;
   padding: 20px;
 }
 
@@ -84,112 +77,90 @@ nav ul li a:hover {
 }
 
 .container img {
-  width: 100px;
-  height: auto;
-  margin: 10px auto;
-  border: 2px solid #ddd;
-  border-radius: 5px;
+  max-width: 100%; /* Ensure images are responsive */
+  height: auto; /* Maintain aspect ratio */
+  margin: 20px 0; /* Add spacing between images */
+  border: none; /* Remove borders */
+  border-radius: 0; /* Remove rounded corners */
   display: block;
-  cursor: pointer;
+  cursor: pointer; /* Remove pointer cursor */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+  margin: 20px auto; /* Center images with auto margins */
 }
 
-.image-modal {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-}
-
-.image-modal img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-.image-modal .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.image-modal .close-btn:hover {
-  background-color: #45a049;
-}
-
-modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+.carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 50px auto; /* Center the carousel vertically */
+  max-width: 80%; /* Limit the carousel width */
 }
 
 .image-carousel {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  max-width: 600px;
-  margin: 20px auto;
-  flex-direction: column;
-  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 15px; /* Add more spacing between images */
+  padding: 10px;
+  max-width: 100%;
+  border-radius: 10px; /* Add rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
 }
 
 .image-carousel img {
-  width: 100%;
+  flex: 0 0 auto;
+  width: 300px; /* Set a fixed width for images */
   height: auto;
-  transition: transform 0.5s ease-in-out;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s ease, box-shadow 0.5s ease; /* Smoother animation */
 }
 
-.image-carousel img.enlarged {
-  transform: scale(1.5);
-  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.5);
-  z-index: 10;
+.image-carousel img:hover {
+  transform: scale(1.1); /* Slight zoom on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
 }
 
 .carousel-controls {
   position: absolute;
   top: 50%;
+  transform: translateY(-50%);
   width: 100%;
   display: flex;
   justify-content: space-between;
-  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .carousel-controls button {
+  pointer-events: all;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
   padding: 10px;
   cursor: pointer;
   border-radius: 50%;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
 }
 
 .carousel-controls button:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Hide scrollbar for the carousel */
+.image-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.image-carousel {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .contact-info {
-  background-color: #ffffff; /* Changed to white for better readability */
+  background-color: #000000; /* Changed to white for better readability */
   color: #123458; /* Dark blue text for contrast */
   padding: 20px; /* Increased padding for better spacing */
   border-radius: 8px;
@@ -213,7 +184,7 @@ modal-overlay {
 .hamburger-menu div {
   width: 100%;
   height: 4px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border-radius: 2px;
 }
 
@@ -243,6 +214,57 @@ modal-overlay {
   border-radius: 3px;
 }
 
+.image-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  max-width: 90%; /* Ensure the modal doesn't exceed 90% of the screen width */
+  max-height: 90%; /* Ensure the modal doesn't exceed 90% of the screen height */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.image-modal img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.image-modal .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #007074;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.image-modal .close-btn:hover {
+  background-color: #034c53;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
 @media (max-width: 768px) {
   nav ul {
     display: none;
@@ -250,5 +272,16 @@ modal-overlay {
 
   .hamburger-menu {
     display: flex;
+  }
+
+  .image-modal {
+    max-width: 95%; /* Adjust modal width for smaller screens */
+    max-height: 80%; /* Adjust modal height for smaller screens */
+    padding: 15px; /* Reduce padding for smaller screens */
+  }
+
+  .image-modal .close-btn {
+    padding: 8px; /* Adjust button size for smaller screens */
+    font-size: 14px;
   }
 }
