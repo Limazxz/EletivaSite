@@ -2,11 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const inicioButton = document.querySelector('a[href="#home"]');
   const sobreButton = document.querySelector('a[href="#sobre"]');
   const contatoButton = document.querySelector('a[href="#contato"]');
+  const container = document.querySelector(".container");
 
   if (inicioButton) {
     inicioButton.addEventListener("click", (event) => {
       event.preventDefault();
-      location.reload("Inicio"); // Refreshes the page only for "Início"
+      window.location.href = "index.html#home";
     });
   }
 
@@ -17,12 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (contatoButton) {
-    contatoButton.addEventListener("click", (event) => {
-      event.preventDefault();
-      window.location.href = "contato.html";
-    });
-  }
+//   if (contatoButton) {
+//     contatoButton.addEventListener("click", (event) => {
+//       event.preventDefault();
+//       window.location.href = "contato.html";
+//     });
+//   }
 
   const images = document.querySelectorAll(".container img");
   const modal = document.createElement("div");
@@ -32,22 +33,20 @@ document.addEventListener("DOMContentLoaded", () => {
   modal.classList.add("image-modal");
   overlay.classList.add("modal-overlay");
 
-  modal.innerHTML = `
-    <button class="close-btn">Fechar</button>
-    <img src="" alt="Imagem ampliada" />
-  `;
-
   document.body.appendChild(modal);
   document.body.appendChild(overlay);
 
-  const modalImage = modal.querySelector("img");
-  const closeButton = modal.querySelector(".close-btn");
-
   function openModal(index) {
     currentIndex = index;
-    modalImage.src = images[currentIndex].src;
+    modal.innerHTML = `
+      <button class="close-btn">Fechar</button>
+      <img src="${images[currentIndex].src}" alt="Imagem ampliada" />
+    `;
     modal.style.display = "block";
     overlay.style.display = "block";
+
+    const closeButton = modal.querySelector(".close-btn");
+    closeButton.addEventListener("click", closeModal);
   }
 
   function closeModal() {
@@ -59,15 +58,29 @@ document.addEventListener("DOMContentLoaded", () => {
     img.addEventListener("click", () => openModal(index));
   });
 
-  closeButton.addEventListener("click", closeModal);
-  overlay.addEventListener("click", closeModal);
+  const hamburgerMenu = document.querySelector(".hamburger-menu");
+  const navDropdown = document.querySelector(".nav-dropdown");
 
-  images.forEach((img) => {
-    img.addEventListener("click", () => {
-      // Remove 'enlarged' class from all images
-      images.forEach((image) => image.classList.remove("enlarged"));
-      // Add 'enlarged' class to the clicked image
-      img.classList.add("enlarged");
+  if (hamburgerMenu) {
+    hamburgerMenu.addEventListener("click", () => {
+      navDropdown.style.display =
+        navDropdown.style.display === "block" ? "none" : "block";
+    });
+  }
+  if (contatoButton) {
+    contatoButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.location.href = "contato.html";
+    });
+  }
+
+
+  const dropdownLinks = navDropdown.querySelectorAll("a");
+  dropdownLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const href = link.getAttribute("href");
+      window.location.href = href;
     });
   });
 });
