@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (contatoButton) {
     contatoButton.addEventListener("click", (event) => {
       event.preventDefault();
-      window.location.href = "contato.html";
+      window.location.href = "contato.html#contato";
     });
   }
 
